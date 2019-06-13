@@ -1,6 +1,10 @@
 package service
 
-import "context"
+import (
+	"context"
+	"fmt"
+	models "evento_microservices/auth/pkg/db"
+)
 
 // AuthService describes the service.
 type AuthService interface {
@@ -21,8 +25,16 @@ func (b *basicAuthService) SignIn(ctx context.Context, email string, password st
 	return b0, e1
 }
 func (b *basicAuthService) SignUp(ctx context.Context, email string, name string, password string) (b0 bool, e1 error) {
-	// TODO implement the business logic of SignUp
-	return b0, e1
+	newObj := models.User{
+		Email: email
+		Name: name
+		Password: password
+	}
+	err := models.CreateNew(newObj)
+	if err != nil{
+		return false, err
+	}
+	return true, nil
 }
 
 // NewBasicAuthService returns a naive, stateless implementation of AuthService.
