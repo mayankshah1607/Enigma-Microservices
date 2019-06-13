@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 	models "evento_microservices/auth/pkg/db"
 )
 
@@ -21,17 +20,24 @@ type AuthService interface {
 type basicAuthService struct{}
 
 func (b *basicAuthService) SignIn(ctx context.Context, email string, password string) (b0 bool, e1 error) {
-	// TODO implement the business logic of SignIn
-	return b0, e1
+	c := make(chan error)
+	go models.Authorize(email, password, c)
+	err := <-c
+	if err != nil {
+		return false, err
+	}
+	return true, nil
 }
 func (b *basicAuthService) SignUp(ctx context.Context, email string, name string, password string) (b0 bool, e1 error) {
 	newObj := models.User{
-		Email: email
-		Name: name
-		Password: password
+		Email:    email,
+		Name:     name,
+		Password: password,
 	}
-	err := models.CreateNew(newObj)
-	if err != nil{
+	c := make(chan error)
+	go models.CreateNew(&newObj, c)
+	err := <-c
+	if err != nil {
 		return false, err
 	}
 	return true, nil
