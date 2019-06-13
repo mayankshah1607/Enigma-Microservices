@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+
 	log "github.com/go-kit/kit/log"
 )
 
@@ -22,7 +23,7 @@ func LoggingMiddleware(logger log.Logger) Middleware {
 
 }
 
-func (l loggingMiddleware) SignIn(ctx context.Context, email string, password string) (b0 bool, e1 error) {
+func (l loggingMiddleware) SignIn(ctx context.Context, email string, password string) (token string, b0 bool, e1 error) {
 	defer func() {
 		l.logger.Log("method", "SignIn", "email", email, "password", password, "b0", b0, "e1", e1)
 	}()

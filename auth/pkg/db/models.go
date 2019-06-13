@@ -3,8 +3,11 @@ package models
 import (
 	"context"
 	"log"
+	"os"
 	"time"
 
+	"github.com/dgrijalva/jwt-go"
+	"github.com/joho/godotenv"
 	"golang.org/x/crypto/bcrypt"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -20,18 +23,32 @@ type User struct {
 	Password string
 }
 
+//CookieModel represents structure of cookie
+type CookieModel struct {
+	email string
+	jwt.StandardClaims
+}
+
 //CONNECTIONSTRING is the URI of the DG
-const CONNECTIONSTRING = "mongodb://localhost:27017"
+var CONNECTIONSTRING string
 
 //DBNAME is the name of DB
-const DBNAME = "evento"
+var DBNAME string
 
 //COLLNAME is the name of collection
-const COLLNAME = "users"
+var COLLNAME string
 
 var db *mongo.Database
 
 func init() {
+	if err := godotenv.Load(); err != nil {
+		log.Print("No .env file found. Services may not work!")
+	}
+
+	CONNECTIONSTRING, _ = os.LookupEnv("CONNECTIONSTRING")
+	DBNAME, _ = os.LookupEnv("DBNAME")
+	COLLNAME, _ = os.LookupEnv("COLLNAME")
+
 	client, err := mongo.NewClient(options.Client().ApplyURI(CONNECTIONSTRING))
 	if err != nil {
 		log.Println(err)
@@ -44,7 +61,7 @@ func init() {
 	}
 	db = client.Database("evento")
 
-	_, err = db.Collection("users").Indexes().CreateOne(
+	_, err = db.Collection(COLLNAME).Indexes().CreateOne(
 		context.Background(),
 		mongo.IndexModel{
 			Keys:    bsonx.Doc{{"email", bsonx.Int32(1)}},
@@ -65,7 +82,7 @@ func CreateNew(u *User, c chan error) {
 	hashString := string(hash)
 	u.Password = hashString
 	log.Println("Attempting to insert :", u.Email)
-	id, err := db.Collection("users").InsertOne(context.Background(), u)
+	id, err := db.Collection(COLLNAME).InsertOne(context.Background(), u)
 	if err != nil {
 		log.Println("Failed to create new user :", err)
 		c <- err
@@ -76,9 +93,9 @@ func CreateNew(u *User, c chan error) {
 }
 
 // Authorize logs a user in
-func Authorize(email string, plainPwd string, c chan error) {
+func Authorize(email string, plainPwd string, c chan error, tk chan string) {
 	var user User
-	err := db.Collection("users").FindOne(context.Background(), primitive.D{{"email", email}}).Decode(&user)
+	err := db.Collection(COLLNAME).FindOne(context.Background(), primitive.D{{"email", email}}).Decode(&user)
 	if err != nil {
 		log.Println("Failed to read DB :", err)
 		c <- err
@@ -94,5 +111,31 @@ func Authorize(email string, plainPwd string, c chan error) {
 	}
 	log.Println("User ", user.Email, " logged in!")
 	c <- nil
+
+	claims := &CookieModel{
+		email: email,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: time.Now().Add(10 * time.Minute).Unix(),
+		},
+	}
+
+	jwtKey, exists := os.LookupEnv("JWT_KEY")
+	if !exists {
+		log.Println("JWT_KEY does not exist! Can not write token")
+		tk <- ""
+		return
+	}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	tokenString, err := token.SignedString([]byte(jwtKey))
+
+	if err != nil {
+		log.Println("Error writing token : ", err)
+		tk <- ""
+		return
+	}
+
+	log.Println("Wrote token for user ", email)
+	tk <- tokenString
 
 }

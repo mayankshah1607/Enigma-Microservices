@@ -8,7 +8,7 @@ import (
 // AuthService describes the service.
 type AuthService interface {
 	// Add your methods here
-	SignIn(ctx context.Context, email string, password string) (bool, error)
+	SignIn(ctx context.Context, email string, password string) (string, bool, error)
 	SignUp(
 		ctx context.Context,
 		email string,
@@ -19,15 +19,22 @@ type AuthService interface {
 
 type basicAuthService struct{}
 
-func (b *basicAuthService) SignIn(ctx context.Context, email string, password string) (b0 bool, e1 error) {
+func (b *basicAuthService) SignIn(ctx context.Context, email string, password string) (s0 string, b1 bool, e2 error) {
 	c := make(chan error)
-	go models.Authorize(email, password, c)
+	tk := make(chan string)
+	go models.Authorize(email, password, c, tk)
 	err := <-c
 	if err != nil {
-		return false, err
+		return "", false, err
 	}
-	return true, nil
+
+	token := <-tk
+	if token == "" {
+		return "", true, nil
+	}
+	return token, true, nil
 }
+
 func (b *basicAuthService) SignUp(ctx context.Context, email string, name string, password string) (b0 bool, e1 error) {
 	newObj := models.User{
 		Email:    email,
