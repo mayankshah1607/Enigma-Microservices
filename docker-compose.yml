@@ -1,0 +1,32 @@
+version: "2"
+services:
+  admin:
+    build:
+      context: .
+      dockerfile: admin/Dockerfile
+    restart: always
+    volumes:
+    - .:/go/src/evento_microservices
+    container_name: admin
+    ports:
+    - 8801:8081
+  auth:
+    build:
+      context: .
+      dockerfile: auth/Dockerfile
+    restart: always
+    volumes:
+    - .:/go/src/evento_microservices
+    container_name: auth
+    ports:
+    - 8800:8081
+  user:
+    build:
+      context: .
+      dockerfile: user/Dockerfile
+    restart: always
+    volumes:
+    - .:/go/src/evento_microservices
+    container_name: user
+    ports:
+    - 8802:8081
