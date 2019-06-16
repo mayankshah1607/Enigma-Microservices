@@ -1,4 +1,4 @@
-package utils
+package iohandlers
 
 import "encoding/json"
 
@@ -8,7 +8,8 @@ type AuthResponse struct {
 	Message string
 }
 
-func encodeResponse(a AuthResponse) (data []byte, e error) {
+//EncodeResponse encodes the AuthResponse
+func EncodeResponse(a AuthResponse) (data []byte, e error) {
 	b, err := json.Marshal(a)
 
 	if err != nil {

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"evento_microservices/auth/service"
+	"enigma_microservices/auth/service"
 	"log"
 )
 

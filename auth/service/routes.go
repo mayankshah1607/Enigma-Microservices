@@ -21,14 +21,14 @@ var routes = Routes{
 		"SignIn",   // Name
 		"POST",     // HTTP method
 		"/sign-in", // Route pattern
-		getAccountHandler,
+		SignInHandler,
 		nil,
 	},
 	Route{
 		"SignUp",
 		"POST",
-		"sign-up",
+		"/sign-up",
 		nil,
 		nil,
-	}
+	},
 }
