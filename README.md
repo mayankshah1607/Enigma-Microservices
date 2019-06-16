@@ -1,2 +1,2 @@
 # Evento-Microservices
-Microservices for "Evento" by IEEE-VIT
+Microservices for "Enigma" by IEEE-VIT
