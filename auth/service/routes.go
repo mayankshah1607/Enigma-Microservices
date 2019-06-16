@@ -8,6 +8,7 @@ type Route struct {
 	Method      string
 	Pattern     string
 	HandlerFunc http.HandlerFunc
+	Middleware  middleware
 }
 
 //Routes is a slice of type Route struct
@@ -17,9 +18,17 @@ type Routes []Route
 var routes = Routes{
 
 	Route{
-		"GetAccount",            // Name
-		"GET",                   // HTTP method
-		"/accounts/{accountId}", // Route pattern
+		"SignIn",   // Name
+		"POST",     // HTTP method
+		"/sign-in", // Route pattern
 		getAccountHandler,
+		nil,
 	},
+	Route{
+		"SignUp",
+		"POST",
+		"sign-up",
+		nil,
+		nil,
+	}
 }

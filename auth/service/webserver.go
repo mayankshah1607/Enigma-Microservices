@@ -9,12 +9,13 @@ import (
 func Run(port string) {
 
 	r := NewRouter()
+	r.Use(loggingMiddleware)
 	http.Handle("/", r)
 	log.Println("Starting HTTP service for auth on PORT: ", port)
 	err := http.ListenAndServe(":"+port, nil)
 
 	if err != nil {
 		log.Println("Failed to start HTTP service for authService, PORT: ", port)
-		log.Println("Error: ", err)
+		log.Println("Error: ", err.Error())
 	}
 }
