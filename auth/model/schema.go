@@ -1,5 +1,7 @@
 package model
 
+import "github.com/dgrijalva/jwt-go"
+
 //User defines the User Schema
 type User struct {
 	Name        string
@@ -7,4 +9,10 @@ type User struct {
 	University  string
 	Password    string
 	CurQuestion int
+}
+
+//Claims is for JWT payload
+type Claims struct {
+	Email string
+	jwt.StandardClaims
 }
