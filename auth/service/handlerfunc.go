@@ -1,10 +1,11 @@
 package service
 
 import (
-	"enigma_microservices/auth/iohandlers"
 	"io/ioutil"
 	"log"
 	"net/http"
+
+	"github.com/mayankshah1607/Enigma-Microservices/auth/iohandlers"
 )
 
 //SignInHandler handles the /sign-in request
