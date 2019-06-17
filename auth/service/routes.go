@@ -28,7 +28,7 @@ var routes = Routes{
 		"SignUp",
 		"POST",
 		"/sign-up",
-		nil,
+		SignUpHandler,
 		nil,
 	},
 }

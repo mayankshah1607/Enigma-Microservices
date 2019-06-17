@@ -14,6 +14,7 @@ import (
 var client *mongo.Client
 var db *mongo.Database
 var dbURI string
+var dbName string
 
 func init() {
 
@@ -30,7 +31,7 @@ func init() {
 		log.Println("Error connecting to database :", err.Error())
 		return
 	}
-
-	db = client.Database("enigma")
+	dbName, _ = os.LookupEnv("DB_NAME")
+	db = client.Database(dbName)
 
 }

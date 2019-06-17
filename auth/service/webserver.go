@@ -10,6 +10,7 @@ func Run(port string) {
 
 	r := NewRouter()
 	r.Use(loggingMiddleware)
+	r.Use(jsonBodyParser)
 	http.Handle("/", r)
 	log.Println("Starting HTTP service for auth on PORT: ", port)
 	err := http.ListenAndServe(":"+port, nil)

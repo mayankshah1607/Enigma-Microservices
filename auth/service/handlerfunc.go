@@ -1,36 +1,46 @@
 package service
 
 import (
-	"io/ioutil"
 	"log"
 	"net/http"
 
+	"github.com/mayankshah1607/Enigma-Microservices/auth/model"
+
+	"github.com/gorilla/context"
 	"github.com/mayankshah1607/Enigma-Microservices/auth/iohandlers"
 )
 
 //SignInHandler handles the /sign-in request
 func SignInHandler(w http.ResponseWriter, r *http.Request) {
 
-	//Get []byte from r.Body
-	b, err := ioutil.ReadAll(r.Body)
-	defer r.Body.Close()
+	// req := context.Get(r, "req")
+	// c := make(chan iohandlers.AuthResponse)
+	// go model.CreateUser(req.(iohandlers.SignUpRequest), c)
+
+	// resp, err := iohandlers.EncodeResponse(<-c)
+	// if err != nil {
+	// 	w.WriteHeader(http.StatusInternalServerError)
+	// 	return
+	// }
+
+	// // Write response
+	// w.Write(resp)
+
+}
+
+//SignUpHandler handles the /sign-up route
+func SignUpHandler(w http.ResponseWriter, r *http.Request) {
+	req := context.Get(r, "req")
+	log.Println("Request parsed :", req)
+	c := make(chan iohandlers.AuthResponse)
+	go model.CreateUser(req.(iohandlers.SignUpRequest), c)
+
+	resp, err := iohandlers.EncodeResponse(<-c)
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
-	//Decode request
-	req, err := iohandlers.DecodeSignInRequest(b)
-	log.Println("Request body :", req)
-
-	//Encode response to []byte
-	resp, err := iohandlers.EncodeResponse(
-		iohandlers.AuthResponse{
-			Status:  true,
-			Message: "Done",
-		},
-	)
 	// Write response
 	w.Write(resp)
-
 }
