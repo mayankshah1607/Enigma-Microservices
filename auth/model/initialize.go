@@ -9,6 +9,7 @@ import (
 	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/x/bsonx"
 )
 
 var client *mongo.Client
@@ -34,4 +35,15 @@ func init() {
 	dbName, _ = os.LookupEnv("DB_NAME")
 	db = client.Database(dbName)
 
+	//Declaring Unique fields
+	_, err = db.Collection("users").Indexes().CreateOne(
+		context.Background(),
+		mongo.IndexModel{
+			Keys:    bsonx.Doc{{"email", bsonx.Int32(1)}},
+			Options: options.Index().SetUnique(true),
+		},
+	)
+	if err != nil {
+		log.Println("Failed to set unique field !")
+	}
 }

@@ -24,14 +24,15 @@ func jsonBodyParser(next http.Handler) http.Handler {
 
 		//This area needs some improvement
 		if r.RequestURI == "/sign-up" {
-			req, err := iohandlers.DecodeSignUpRequest(b)
 
+			req, err := iohandlers.DecodeSignUpRequest(b)
 			if err != nil {
 				log.Println("Error while decoding request")
 				http.Error(w, err.Error(), 500)
 			}
 			context.Set(r, "req", req)
 		} else {
+
 			req, err := iohandlers.DecodeSignInRequest(b)
 			if err != nil {
 				log.Println("Error while decoding request")
