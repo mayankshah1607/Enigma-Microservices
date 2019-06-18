@@ -28,7 +28,7 @@ var routes = Routes{
 		"SignUp",
 		"POST",
 		"/delete",
-		nil,
+		DeleteHandler,
 		nil,
 	},
 	Route{
