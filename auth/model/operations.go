@@ -33,6 +33,7 @@ func CreateUser(u iohandlers.SignUpRequest, c chan iohandlers.AuthResponse) {
 		University:  u.University,
 		Password:    string(hash),
 		CurQuestion: 1,
+		Admin:       false,
 	}
 	insertRes, err := db.Collection("users").InsertOne(context.TODO(), obj)
 

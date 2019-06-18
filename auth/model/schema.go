@@ -9,6 +9,7 @@ type User struct {
 	University  string
 	Password    string
 	CurQuestion int
+	Admin       bool
 }
 
 //Claims is for JWT payload
