@@ -1,6 +1,8 @@
 package iohandlers
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 //AdminResponse is the structure of response
 type AdminResponse struct {

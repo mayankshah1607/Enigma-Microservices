@@ -31,11 +31,4 @@ var routes = Routes{
 		DeleteHandler,
 		nil,
 	},
-	Route{
-		"GetQuestions",
-		"GET",
-		"/get-questions",
-		nil,
-		nil,
-	},
 }

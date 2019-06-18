@@ -57,3 +57,14 @@ func loggingMiddleware(next http.Handler) http.Handler {
 		next.ServeHTTP(w, r)
 	})
 }
+
+func authorizeMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		c, err := r.Cookie("enigma_auth")
+		if err != nil {
+			log.Println("Cookie not found!")
+		}
+		log.Println(c)
+		next.ServeHTTP(w, r)
+	})
+}

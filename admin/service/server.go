@@ -9,6 +9,7 @@ import (
 func Run(port string) {
 
 	r := NewRouter()
+	r.Use(authorizeMiddleware)
 	r.Use(loggingMiddleware)
 	r.Use(jsonBodyParser)
 	http.Handle("/", r)

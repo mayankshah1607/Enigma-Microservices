@@ -34,9 +34,6 @@ func CreateQuestion(q iohandlers.SubmitRequest, c chan iohandlers.AdminResponse)
 	}
 }
 
-//GetAllQuestions fetches all the questions
-func GetAllQuestions() {}
-
 //DeleteQuestion is used by /delete
 func DeleteQuestion(id string, c chan iohandlers.AdminResponse) {
 	objID, _ := primitive.ObjectIDFromHex(id)
