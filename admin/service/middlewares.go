@@ -4,9 +4,13 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
+
+	"github.com/dgrijalva/jwt-go"
 
 	"github.com/gorilla/context"
 	"github.com/mayankshah1607/Enigma-Microservices/admin/iohandlers"
+	"github.com/mayankshah1607/Enigma-Microservices/admin/model"
 )
 
 type middleware func(next http.HandlerFunc) http.HandlerFunc
@@ -63,8 +67,38 @@ func authorizeMiddleware(next http.Handler) http.Handler {
 		c, err := r.Cookie("enigma_auth")
 		if err != nil {
 			log.Println("Cookie not found!")
+			return
 		}
-		log.Println(c)
+		tknString := c.Value
+		claims := &model.Claims{}
+		jwtKey, _ := os.LookupEnv("JWT_KEY")
+
+		tkn, err := jwt.ParseWithClaims(tknString, claims, func(token *jwt.Token) (interface{}, error) {
+			return []byte(jwtKey), nil
+		})
+
+		if !tkn.Valid {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+
+		if err != nil {
+			if err == jwt.ErrSignatureInvalid {
+				w.WriteHeader(http.StatusUnauthorized)
+				return
+			}
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
+
+		//If token is valid, get Email and check in database
+		email := claims.Email
+		exists := model.CheckAdmin(email)
+		if !exists {
+			log.Println("Admin log in attempt from unauthorized user : ", email)
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
 		next.ServeHTTP(w, r)
 	})
 }

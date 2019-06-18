@@ -52,3 +52,13 @@ func DeleteQuestion(id string, c chan iohandlers.AdminResponse) {
 		Message: "Successfully deleted question",
 	}
 }
+
+//CheckAdmin checks if a given email is admin
+func CheckAdmin(e string) bool {
+	var user User
+	err := db.Collection("users").FindOne(context.TODO(), bson.M{"email": e, "admin": true}).Decode(&user)
+	if err != nil {
+		return false
+	}
+	return true
+}
