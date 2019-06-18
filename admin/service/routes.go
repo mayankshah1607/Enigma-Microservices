@@ -21,13 +21,20 @@ var routes = Routes{
 		"SignIn",  // Name
 		"POST",    // HTTP method
 		"/submit", // Route pattern
-		nil,
+		SubmitHandler,
 		nil,
 	},
 	Route{
 		"SignUp",
 		"POST",
 		"/delete",
+		nil,
+		nil,
+	},
+	Route{
+		"GetQuestions",
+		"GET",
+		"/get-questions",
 		nil,
 		nil,
 	},
