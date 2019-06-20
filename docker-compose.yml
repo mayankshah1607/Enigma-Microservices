@@ -1,0 +1,14 @@
+version: "3"
+services:
+  admin:
+    build:
+      dockerfile: ./admin/Dockerfile
+      context: .
+    ports:
+      - "8082:8082"
+  auth:
+    build:
+      dockerfile: ./auth/Dockerfile
+      context: .
+    ports:
+      - "8081:8081"
