@@ -111,3 +111,8 @@ Response => JSON({
   })
 ```
 
+## TODO
+* Testing - Writing unit tests for different modules
+* Add scoring logic for the users
+* Mailing microservice
+
