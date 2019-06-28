@@ -16,7 +16,10 @@ To serve the application, follow the steps:
   ```
   
 * ```
-  cd Enigma-Microservices
+  $ cd Enigma-Microservices
   ```
   
  * Make sure you have [Docker](https://docs.docker.com/v17.09/engine/installation/) and [docker-compose](https://docs.docker.com/compose/install/) set up before executing the next command :
+  ```
+  $ docker-compose up --build
+  ```
