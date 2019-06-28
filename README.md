@@ -14,7 +14,19 @@ To serve the application, follow the steps:
   ```
   $ git clone https://github.com/mayankshah1607/Enigma-Microservices.git
   ```
-  
+* Export the following environment variables, or create a .env file in the root directory of the project :
+  ```
+  AUTH_SERVICE_NAME=""
+  AUTH_SERVICE_PORT=""
+  ADMIN_SERVICE_NAME=""
+  ADMIN_SERVICE_PORT=""
+  SUBMISSION_SERVICE_NAME=""
+  SUBMISSION_SERVICE_PORT=""
+  DB_URI=""
+  DB_NAME=""
+  JWT_KEY=""
+  ```
+
 * ```
   $ cd Enigma-Microservices
   ```
@@ -38,3 +50,5 @@ Request Body => JSON({
     image_url: String,
     answer: String
    })
+```
+
