@@ -3,7 +3,7 @@
 
 > Note : This project is still in development and was implemented as an experiment. This may not be used in production for future versions of Enigma.
 
-Enigma is an online cryptic hunt conducted by (IEEE VIT Vellore)[http://ieeevit.com]. Participants have to solve a series of mind boggling questions to win cash prizes!
+Enigma is an online cryptic hunt conducted every year by [IEEE VIT Vellore](http://ieeevit.com). Participants have to solve a series of mind boggling questions to win cash prizes!
 
 ## Architecture
 ![Architecture](docs/architecture.jpg)
