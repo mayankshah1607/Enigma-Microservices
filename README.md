@@ -43,12 +43,28 @@ To develop this project, simply clone it and `cd` into the root directory. Open 
 ## API Documentation
 ### Admin
 This route creates a new Question in the database
-`POST /admin/submit`
 ```
+POST /admin/submit
 Request Body => JSON({
     text: String, 
     image_url: String,
     answer: String
    })
+Response => JSON({
+    Status: Boolean,
+    Message: String
+  })
+```
+
+This route deletes a question from the database
+```
+POST /admin/delete
+Request Body => JSON({
+    id: String
+   })
+Response => JSON({
+    Status: Boolean,
+    Message: String
+  })
 ```
 
