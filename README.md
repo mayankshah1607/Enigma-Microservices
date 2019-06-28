@@ -11,4 +11,12 @@ To serve the application, follow the steps:
 
 * Clone the repository
 
-  `$ git clone https://github.com/mayankshah1607/Enigma-Microservices.git`
+  ````
+  $ git clone https://github.com/mayankshah1607/Enigma-Microservices.git
+  ```
+  
+* ```
+  cd Enigma-Microservices
+  ```
+  
+ * Make sure you have [Docker](https://docs.docker.com/v17.09/engine/installation/) and [docker-compose](https://docs.docker.com/compose/install/) set up before executing the next command :
