@@ -1,18 +1,28 @@
 version: "3"
 services:
+  nginx:
+    restart: always
+    build:
+      dockerfile: ./nginx/Dockerfile
+      context: .
+    ports:
+      - "3000:80"
   submission:
+    restart: always
     build:
       dockerfile: ./submission/Dockerfile
       context: .
     ports:
       - "8083:8083"
   admin:
+    restart: always
     build:
       dockerfile: ./admin/Dockerfile
       context: .
     ports:
       - "8082:8082"
   auth:
+    restart: always
     build:
       dockerfile: ./auth/Dockerfile
       context: .
