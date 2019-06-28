@@ -21,7 +21,7 @@ var routes = Routes{
 		"Submit",  // Name
 		"POST",    // HTTP method
 		"/submit", // Route pattern
-		nil,
+		SubmitHandler,
 		nil,
 	},
 }

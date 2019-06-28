@@ -4,7 +4,7 @@ import "encoding/json"
 
 //SubmissionRequest defines the request structure
 type SubmissionRequest struct {
-	QNo    string `json:"q_no"`
+	QId    string `json:"q_id"`
 	Answer string `json:"answer"`
 }
 

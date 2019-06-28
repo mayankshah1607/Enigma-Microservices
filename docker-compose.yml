@@ -1,5 +1,11 @@
 version: "3"
 services:
+  submission:
+    build:
+      dockerfile: ./submission/Dockerfile
+      context: .
+    ports:
+      - "8083:8083"
   admin:
     build:
       dockerfile: ./admin/Dockerfile
