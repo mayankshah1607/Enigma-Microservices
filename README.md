@@ -41,7 +41,7 @@ To serve the application, follow the steps:
 To develop this project, simply clone it and `cd` into the root directory. Open your favourite text editor and start coding!
 
 ## API Documentation
-### Admin
+### 1. Admin
 This route creates a new Question in the database
 ```
 POST /admin/submit
@@ -62,6 +62,49 @@ POST /admin/delete
 Request Body => JSON({
     id: String
    })
+Response => JSON({
+    Status: Boolean,
+    Message: String
+  })
+```
+
+### 2. Auth
+This route creates a new user
+```
+POST /auth/sign-up
+Request body => JSON({
+    name: String,
+    email: String,
+    university: String,
+    password: String,
+  })
+Response => JSON({
+  Status: Boolean,
+  Message: String
+})
+```
+
+This route authenticates an existing user and returns a cookie
+```
+POST /auth/sign-up
+Request body => JSON({
+    email: String
+    password: String,
+  })
+Response => JSON({
+  Status: Boolean,
+  Message: String
+})
+```
+
+### 3. Submission
+This route accepts an answer for a given question, and checks if the answer is correct
+```
+POST /submission/submit
+Request body => JSON({
+    q_id: String,
+    answer: String
+  })
 Response => JSON({
     Status: Boolean,
     Message: String
