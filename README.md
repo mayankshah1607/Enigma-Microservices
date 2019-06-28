@@ -113,6 +113,15 @@ Response => JSON({
 
 ## TODO
 * Testing - Writing unit tests for different modules
+* Setting up build pipelines for CI/CD.
 * Add scoring logic for the users
 * Mailing microservice
+
+## Contributing 
+When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
+
+We are always looking forward to new ideas and meaningful contributions.
+
+## License
+[MIT](LICENSE)
 
