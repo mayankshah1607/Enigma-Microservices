@@ -24,3 +24,17 @@ To serve the application, follow the steps:
     ```
     $ docker-compose up --build
     ```
+
+## Development Setup
+To develop this project, simply clone it and `cd` into the root directory. Open your favourite text editor and start coding!
+
+## API Documentation
+### Admin
+This route creates a new Question in the database
+`POST /admin/submit`
+```
+Request Body => JSON({
+    text: String, 
+    image_url: String,
+    answer: String
+   })
