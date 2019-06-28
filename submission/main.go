@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"github.com/mayankshah1607/Enigma-Microservices/auth/service"
+	"github.com/mayankshah1607/Enigma-Microservices/submission/service"
 )
 
 var serviceName string
