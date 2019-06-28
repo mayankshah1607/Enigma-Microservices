@@ -10,4 +10,5 @@
 To serve the application, follow the steps:
 
 * Clone the repository
-  ```$ git clone ```
+
+  ```$ git clone https://github.com/mayankshah1607/Enigma-Microservices.git```
