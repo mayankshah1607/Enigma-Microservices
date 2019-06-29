@@ -1,4 +1,6 @@
 # Enigma Microservices
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/mayankshah1607/Enigma-Microservices/master/LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) 
+
 "Enigma" (by IEEE-VIT) implemented as a microservices architecture using Golang
 
 > Note : This project is still in development and was implemented as an experiment. This may not be used in production for future versions of Enigma.
