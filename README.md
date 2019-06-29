@@ -115,7 +115,7 @@ Response => JSON({
   })
 ```
 
-## TODO
+## TO-DO
 * Testing - Writing unit tests for different modules
 * Setting up build pipelines for CI/CD.
 * Add scoring logic for the users
