@@ -47,8 +47,9 @@ To develop this project, simply clone it and `cd` into the root directory. Open 
 ## API Documentation
 ### 1. Admin
 This route creates a new Question in the database
-```
+
 **POST /admin/submit**
+```
 Request Body => JSON({
     text: String, 
     image_url: String,
@@ -61,8 +62,9 @@ Response => JSON({
 ```
 
 This route deletes a question from the database
+
+**POST /admin/delete**
 ```
-POST /admin/delete
 Request Body => JSON({
     id: String
    })
@@ -74,8 +76,9 @@ Response => JSON({
 
 ### 2. Auth
 This route creates a new user
+
+**POST /auth/sign-up**
 ```
-POST /auth/sign-up
 Request body => JSON({
     name: String,
     email: String,
@@ -89,8 +92,9 @@ Response => JSON({
 ```
 
 This route authenticates an existing user and returns a cookie
+
+**POST /auth/sign-up**
 ```
-POST /auth/sign-up
 Request body => JSON({
     email: String
     password: String,
@@ -103,8 +107,9 @@ Response => JSON({
 
 ### 3. Submission
 This route accepts an answer for a given question, and checks if the answer is correct
+
+**POST /submission/submit**
 ```
-POST /submission/submit
 Request body => JSON({
     q_id: String,
     answer: String
