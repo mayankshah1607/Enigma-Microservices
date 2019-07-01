@@ -48,7 +48,7 @@ To develop this project, simply clone it and `cd` into the root directory. Open 
 ### 1. Admin
 This route creates a new Question in the database
 ```
-*POST /admin/submit*
+**POST /admin/submit**
 Request Body => JSON({
     text: String, 
     image_url: String,
